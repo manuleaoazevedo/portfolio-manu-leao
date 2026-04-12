@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Manu — UX &amp; Product Designer</title>
+<meta name="description" content="Portfólio de Manu — Designer com foco em UX e Product Design."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,900&family=Lato:wght@300;400;700;800;900&family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS — extracted from Figma inspection
+═══════════════════════════════════════════════ */
+:root{
+  --bg:       #060608;
+  --bg2:      #13151a;
+  --bg3:      #1a1d24;
+  --ink:      #f0f0ee;
+  --ink2:     #a8a9a6;
+  --ink3:     #5e6168;
+  --cyan:     #00d4ff;
+  --violet:   #7b5cf0;
+  --violet-lt:#deabf3;
+  --lime:     #aaff4a;
+  --border:   rgba(240,240,238,.08);
+  --border2:  rgba(240,240,238,.14);
+  --ease:     cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:'DM Sans',sans-serif;font-weight:300;
+  line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.018) 2px,rgba(0,0,0,.018) 4px);
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{cursor:pointer;border:none;background:none;font:inherit}
+
+/* ─── PROGRESS BAR ─── */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));z-index:300;pointer-events:none}
+
+/* ─── HEADER ─── */
+header{
+  position:fixed;top:0;left:0;right:0;height:64px;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 96px;
+  background:rgba(6,6,8,.65);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid transparent;
+  transition:border-color .4s,background .4s;
+}
+header.scrolled{border-color:var(--border);background:rgba(6,6,8,.9)}
+.logo{display:flex;align-items:center;gap:9px;
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink);}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 8px var(--cyan);animation:blink 2.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* Nav pill — Figma node 57:12 */
+nav.pill{
+  display:flex;align-items:center;gap:28px;
+  background:rgba(93,92,91,.3);backdrop-filter:blur(35px);-webkit-backdrop-filter:blur(35px);
+  border-radius:40px;padding:0 28px;height:46px;
+}
+.nav-a{
+  font-family:'Inter',sans-serif;font-size:16px;font-weight:500;
+  color:#fff;letter-spacing:-.08px;white-space:nowrap;
+  position:relative;padding-bottom:2px;
+  transition:color .25s;
+}
+.nav-a::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:100%;
+  height:1px;background:var(--cyan);transition:right .3s var(--ease);}
+.nav-a:hover{color:var(--cyan)}
+.nav-a:hover::after,.nav-a.active::after{right:0}
+.nav-a.active{color:var(--cyan)}
+
+.hamburger{display:none;flex-direction:column;gap:5px;padding:4px}
+.hamburger span{display:block;height:1.5px;width:22px;background:var(--ink);border-radius:1px;
+  transition:transform .3s var(--ease),opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-nav{display:none;position:fixed;top:64px;left:0;right:0;
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:2rem 24px;flex-direction:column;gap:1.5rem;z-index:190;}
+.mobile-nav.open{display:flex}
+.mobile-nav .nav-a{font-size:1rem}
+
+/* ─── HERO — Figma bg #060608, 940px tall ─── */
+#hero{
+  position:relative;min-height:100svh;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:calc(64px + 64px) 96px 80px;
+}
+#hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,#000 10%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,#000 10%,transparent 100%);
+  opacity:.55;
+}
+/* Glow ellipse top-left (violet) */
+.glow-vl{
+  position:absolute;width:500px;height:500px;
+  top:8px;left:-150px;border-radius:50%;
+  background:rgba(123,92,240,.1);filter:blur(90px);pointer-events:none;
+}
+/* Glow ellipse bottom-right (cyan) — Figma node 4:64 */
+.glow-cy{
+  position:absolute;width:439px;height:421px;
+  right:0;bottom:100px;border-radius:50%;
+  background:rgba(0,212,255,.08);filter:blur(80px);pointer-events:none;
+}
+
+/* Headline block — Figma node 64:18, 857px wide */
+.hero-txt{
+  position:relative;z-index:1;max-width:857px;
+  opacity:0;animation:fadeUp .8s var(--ease) .3s forwards;
+}
+.hero-line1{
+  font-family:'Lato',sans-serif;font-size:64px;font-weight:700;
+  line-height:80px;letter-spacing:-.5px;color:var(--ink);display:block;
+}
+.hero-line2{
+  font-family:'Lato',sans-serif;font-size:80px;font-weight:800;
+  line-height:80px;letter-spacing:-.5px;color:var(--violet-lt);display:block;margin-bottom:36px;
+}
+.hero-sub{
+  font-family:'DM Sans',sans-serif;font-size:20px;font-weight:300;
+  line-height:30px;color:var(--ink2);max-width:740px;
+  opacity:0;animation:fadeUp .8s var(--ease) .5s forwards;
+}
+
+/* Chips band */
+.band-wrap{
+  margin-top:52px;position:relative;z-index:1;
+  opacity:0;animation:fadeUp .8s var(--ease) .65s forwards;
+}
+.band-label{
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  letter-spacing:1.6px;color:var(--ink2);margin-bottom:22px;
+  display:flex;align-items:center;gap:12px;
+}
+.band-label::before{content:'';width:20px;height:1px;background:var(--cyan);flex-shrink:0;}
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chip{
+  padding:13px 22px;border:1px solid var(--border2);border-radius:30px;
+  font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;
+  letter-spacing:.5px;color:var(--ink2);cursor:default;
+  transition:background .2s,border-color .2s,color .2s,transform .2s var(--ease);
+}
+.chip:hover{background:rgba(0,212,255,.06);border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px)}
+
+/* Scroll indicator */
+.hero-scroll{
+  position:absolute;bottom:40px;left:96px;z-index:1;
+  display:flex;align-items:center;gap:14px;
+  opacity:0;animation:fadeIn 1s var(--ease) 1.4s forwards;
+}
+.scroll-line{width:40px;height:1px;background:var(--ink3);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:var(--cyan);animation:scan 2.2s ease-in-out 1.8s infinite}
+@keyframes scan{0%{left:-100%}100%{left:100%}}
+.scroll-lbl{font-family:'Montserrat',sans-serif;font-size:.625rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink3)}
+
+/* ─── PROJETOS — Figma bg #060608, starts at y=945 ─── */
+#projetos{
+  padding:80px 96px;background:var(--bg);
+  border-top:1px solid var(--border);
+}
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--cyan);flex-shrink:0}
+.eyebrow span{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  letter-spacing:1.6px;color:var(--ink2);text-transform:uppercase}
+.sec-title{
+  font-family:'Lato',sans-serif;font-size:48px;font-weight:800;
+  line-height:56px;letter-spacing:-1.2px;color:var(--ink);max-width:561px;
+}
+.proj-header{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:40px;margin-bottom:52px}
+.proj-desc{font-size:16px;line-height:26px;color:var(--ink2);max-width:480px}
+.proj-desc strong{font-weight:900;color:var(--ink)}
+
+/* Wide top card (Artê) — 1280px × 431px in Figma */
+.proj-wide{
+  position:relative;overflow:hidden;border-radius:14px;height:431px;
+  margin-bottom:12px;cursor:pointer;
+  border:1px solid transparent;
+  transition:border-color .3s;
+  display:block;
+}
+.proj-wide:hover{border-color:rgba(240,240,238,.18)}
+.proj-wide img.thumb{width:100%;height:100%;object-fit:cover;
+  transition:transform .6s var(--ease);display:block;}
+.proj-wide:hover img.thumb{transform:scale(1.04)}
+.proj-wide .scrim{position:absolute;inset:0;background:rgba(0,0,0,.43);
+  transition:background .35s var(--ease)}
+.proj-wide:hover .scrim{background:rgba(0,0,0,.58)}
+
+/* Row with 2 cards */
+.proj-row{display:grid;grid-template-columns:617fr 648fr;gap:12px}
+.proj-card{
+  position:relative;overflow:hidden;border-radius:14px;height:326px;cursor:pointer;
+  border:1px solid var(--border);
+  transition:border-color .3s;
+}
+.proj-card:hover{border-color:rgba(240,240,238,.18)}
+.proj-card img.thumb{width:100%;height:100%;object-fit:cover;
+  transition:transform .6s var(--ease);display:block;}
+.proj-card:hover img.thumb{transform:scale(1.04)}
+.proj-card .scrim{position:absolute;inset:0;background:rgba(0,0,0,.52);
+  transition:background .35s var(--ease)}
+.proj-card:hover .scrim{background:rgba(0,0,0,.65)}
+
+/* Text overlay inside cards */
+.card-info{position:absolute;bottom:0;left:0;right:0;padding:24px 30px}
+.card-arrow{
+  position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--border2);background:rgba(6,6,8,.5);
+  display:flex;align-items:center;justify-content:center;color:var(--ink);
+  opacity:0;transform:scale(.7);transition:opacity .3s,transform .3s var(--ease);}
+.proj-wide:hover .card-arrow,
+.proj-card:hover .card-arrow{opacity:1;transform:scale(1)}
+.card-name{font-family:'Lato',sans-serif;font-size:22px;font-weight:700;
+  color:var(--ink);letter-spacing:-.5px;margin-bottom:4px}
+.card-brief{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;color:var(--ink2)}
+
+/* ─── MARQUEE — Figma bg #13151a, 300px tall ─── */
+#marquee{
+  background:var(--bg2);overflow:hidden;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.mq{overflow:hidden;white-space:nowrap;padding:14px 0}
+.mq-inner{display:inline-flex}
+.mq.fwd  .mq-inner{animation:mqL 20s linear infinite}
+.mq.rev  .mq-inner{animation:mqR 26s linear infinite;margin-top:0}
+@keyframes mqL{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mqR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.mw{font-family:'Lato',sans-serif;font-size:80px;font-weight:800;
+  letter-spacing:-2.5px;line-height:88px;padding-right:.55em;user-select:none}
+.mw-out{color:rgba(240,240,238,.10)}
+.mw-cyan{color:var(--cyan)}
+.mw-fill{color:var(--bg3)}
+.mw-viol{color:var(--violet)}
+.mw-lime{color:var(--lime)}
+.mw-dot{display:inline-block;width:.14em;height:.14em;border-radius:50%;
+  background:var(--lime);box-shadow:0 0 14px var(--lime);
+  vertical-align:middle;margin-right:.3em}
+.mq:hover .mq-inner{animation-play-state:paused}
+
+/* ─── SOBRE MIM — Figma bg #060608, starts y=2394 ─── */
+#sobre{
+  padding:80px 96px;background:var(--bg);
+  border-top:1px solid var(--border);
+}
+.sobre-grid{display:grid;grid-template-columns:527px 1fr;gap:114px;align-items:start}
+.photo-frame{
+  border-radius:14px;overflow:hidden;
+  height:373px;width:100%;position:relative;
+}
+.photo-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-badge{
+  position:absolute;bottom:24px;left:24px;
+  background:var(--bg);border:1px solid var(--border2);border-radius:999px;
+  padding:.4375rem 1rem;font-family:'Montserrat',sans-serif;font-size:.6875rem;
+  font-weight:600;letter-spacing:.06em;color:var(--lime);
+  display:flex;align-items:center;gap:.5rem;
+}
+.photo-badge::before{content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--lime);box-shadow:0 0 6px var(--lime)}
+.sobre-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sobre-eyebrow::before{content:'';width:21px;height:1px;background:var(--cyan)}
+.sobre-eyebrow span{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  letter-spacing:1.6px;color:var(--ink2);text-transform:uppercase}
+.sobre-name{
+  font-family:'Lato',sans-serif;font-size:44px;font-weight:800;
+  line-height:52px;letter-spacing:-1.2px;color:var(--ink);margin-bottom:26px;
+}
+.sobre-bio{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:400;
+  line-height:26px;color:var(--ink2);max-width:622px;margin-bottom:48px}
+/* Timeline label */
+.tl-label{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.tl-label::before{content:'';width:20px;height:1px;background:var(--violet)}
+.tl-label span{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  letter-spacing:1.6px;color:var(--ink3);text-transform:uppercase}
+.tl-wrap{position:relative;padding-left:22px}
+.tl-line{position:absolute;left:4px;top:5px;bottom:5px;width:1px;background:var(--border)}
+.tl-item{position:relative;padding-bottom:28px;
+  display:grid;grid-template-columns:130px 1fr;gap:0 16px}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{position:absolute;left:-18px;top:4px;width:9px;height:9px;border-radius:50%;
+  background:var(--bg);border:1.5px solid var(--ink3);
+  transition:border-color .2s,box-shadow .2s;}
+.tl-item:hover .tl-dot{border-color:var(--violet);box-shadow:0 0 8px var(--violet)}
+.tl-year{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  letter-spacing:.4px;color:var(--ink3);line-height:1.4}
+.tl-place{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  letter-spacing:-.2px;color:var(--ink);margin-bottom:3px}
+.tl-desc{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;
+  line-height:20px;color:var(--ink3)}
+
+/* ─── CTA — Figma node 4:200, bg #060608 ─── */
+#cta{
+  padding:80px 96px;background:var(--bg);
+  border-top:1px solid var(--border);position:relative;overflow:hidden;
+}
+.cta-glow{position:absolute;width:500px;height:500px;border-radius:50%;
+  top:-200px;right:0;background:rgba(123,92,240,.07);filter:blur(80px);pointer-events:none}
+.cta-ey{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.cta-ey::before{content:'';width:20px;height:1px;background:var(--cyan)}
+.cta-ey span{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;
+  letter-spacing:1.6px;color:var(--cyan);text-transform:uppercase}
+.cta-title{
+  font-family:'Lato',sans-serif;font-size:64px;font-weight:800;
+  line-height:72px;letter-spacing:-2px;color:var(--ink);
+  margin-bottom:40px;position:relative;z-index:1;white-space:pre-line;
+}
+.cta-sub{
+  font-family:'Lato',sans-serif;font-size:16px;font-weight:300;
+  line-height:28px;color:var(--ink2);margin-bottom:52px;
+  position:relative;z-index:1;white-space:pre-line;
+}
+/* CTA button — Figma node 95:228 exact styles */
+.btn-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--cyan);border-radius:26px;
+  padding:14px 26px;
+  font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:1.4px;color:var(--cyan);position:relative;z-index:1;
+  transition:background .25s,color .25s,transform .25s var(--ease),box-shadow .25s;
+}
+.btn-cta:hover{background:var(--cyan);color:#020304;
+  transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,212,255,.22)}
+.btn-cta svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;
+  transition:stroke .25s,transform .2s}
+.btn-cta:hover svg{transform:translate(2px,-2px)}
+
+/* ─── FOOTER — Figma node 4:209, bg #0e0f11 ─── */
+footer{
+  background:#0e0f11;border-top:1px solid var(--border);
+  padding:0 96px;height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.foot-copy{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:400;
+  letter-spacing:.5px;color:var(--ink3)}
+.foot-links{display:flex;gap:40px}
+.foot-a{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:1.2px;color:var(--ink3);transition:color .2s}
+.foot-a:hover{color:var(--cyan)}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(28px);
+  transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.18s}.reveal.d3{transition-delay:.26s}
+.reveal.vis{opacity:1;transform:none}
+
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{to{opacity:1}}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px){
+  header,#hero,#projetos,#sobre,#cta,footer{padding-left:48px;padding-right:48px}
+  .sobre-grid{grid-template-columns:1fr;gap:48px}
+  .photo-frame{max-width:480px;height:320px}
+  .proj-header{grid-template-columns:1fr;gap:24px}
+  .hero-line1{font-size:52px} .hero-line2{font-size:64px;line-height:72px}
+}
+@media(max-width:860px){
+  nav.pill{display:none} .hamburger{display:flex}
+  #hero{padding-top:calc(64px+32px)}
+  .hero-line1{font-size:42px;line-height:56px}
+  .hero-line2{font-size:52px;line-height:64px}
+  .proj-row{grid-template-columns:1fr}
+  .proj-wide{height:300px} .proj-card{height:260px}
+  .mw{font-size:60px;line-height:72px}
+  .cta-title{font-size:52px;line-height:62px}
+  header{padding:0 24px}
+}
+@media(max-width:600px){
+  header,#hero,#projetos,#sobre,#cta,footer{padding-left:20px;padding-right:20px}
+  .hero-line1{font-size:36px;line-height:46px}
+  .hero-line2{font-size:42px;line-height:52px}
+  .chip{font-size:14px;padding:10px 16px}
+  .mw{font-size:44px;line-height:54px}
+  .cta-title{font-size:40px;line-height:50px}
+  footer{height:auto;flex-direction:column;align-items:flex-start;padding-block:20px;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<!-- ══════════════════════ HEADER ══════════════════════ -->
+<header id="hdr">
+  <a href="#hero" class="logo">
+    <span class="logo-dot" aria-hidden="true"></span>
+    <span>Manu</span>
+  </a>
+
+  <!-- Nav pill — Figma node 57:12 -->
+  <nav class="pill" aria-label="Navegação principal">
+    <a href="#projetos" class="nav-a">Projetos</a>
+    <a href="#sobre"    class="nav-a">Sobre mim</a>
+    <a href="#cta"      class="nav-a">Contato</a>
+  </nav>
+
+  <button class="hamburger" id="ham" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-nav" id="mnav" aria-label="Menu mobile">
+  <a href="#projetos" class="nav-a">Projetos</a>
+  <a href="#sobre"    class="nav-a">Sobre mim</a>
+  <a href="#cta"      class="nav-a">Contato</a>
+</nav>
+
+<main>
+
+<!-- ══════════════════════ HERO ══════════════════════ -->
+<!-- Figma node 4:13 bg:#060608 -->
+<section id="hero" aria-label="Apresentação">
+  <div class="glow-vl" aria-hidden="true"></div>
+  <div class="glow-cy" aria-hidden="true"></div>
+
+  <!-- Figma node 64:18 — 857px, flex col, 227px tall -->
+  <div class="hero-txt">
+    <!-- node 4:70: "Oi, me chamo Manu!" 64px Bold -->
+    <span class="hero-line1">Oi, me chamo Manu!</span>
+    <!-- "UX & Product Designer" 80px ExtraBold #deabf3 -->
+    <span class="hero-line2">UX &amp; Product Designer</span>
+  </div>
+
+  <!-- node 4:71: 20px Light #a8a9a6 -->
+  <p class="hero-sub">Pensamento estratégico, pesquisa de usuário e execução visual precisa gerando impacto real.</p>
+
+  <!-- node 5:9 + 64:19 — chips band -->
+  <div class="band-wrap">
+    <div class="band-label">ÁREAS DE ATUAÇÃO</div>
+    <div class="chips">
+      <span class="chip">UX Design</span>
+      <span class="chip">Product Design</span>
+      <span class="chip">UI Design</span>
+      <span class="chip">Design System</span>
+      <span class="chip">UX Research</span>
+      <span class="chip">Inteligência Artificial</span>
+      <span class="chip">Testes de Usabilidade</span>
+      <span class="chip">Figma</span>
+      <span class="chip">Notion</span>
+      <span class="chip">Documentação</span>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span class="scroll-lbl">Scroll para explorar</span>
+  </div>
+</section>
+
+<!-- ══════════════════════ PROJETOS ══════════════════════ -->
+<!-- Figma node 4:126 bg:#060608 h:1155 -->
+<section id="projetos" aria-label="Projetos selecionados">
+
+  <div class="proj-header reveal">
+    <!-- node 4:128 eyebrow -->
+    <div>
+      <div class="eyebrow"><span>PROJETOS SELECIONADOS</span></div>
+      <!-- node 4:129 48px ExtraBold -->
+      <h2 class="sec-title">Trabalhos que unem design e tecnologia</h2>
+    </div>
+    <!-- node 4:130 -->
+    <p class="proj-desc">
+      Cada projeto começa com uma pergunta genuína:
+      <strong> o que as pessoas realmente precisam?</strong>
+      Conecto estratégia e execução para transformar problemas reais em soluções que funcionam.
+    </p>
+  </div>
+
+  <!-- ARTÊ — node 93:136 — WIDE CARD com link para page-arte.html -->
+  <a href="page-arte.html" class="proj-wide reveal" aria-label="Abrir case study: Artê">
+    <img
+      class="thumb"
+      src="https://www.figma.com/api/mcp/asset/82c5a04a-8b41-47b9-8e9e-a2091b757290"
+      alt="Projeto Artê — plataforma de atividades manuais"
+      loading="lazy"
+    />
+    <div class="scrim"></div>
+    <div class="card-arrow" aria-hidden="true">
+      <svg width="13" height="13" viewBox="0 0 14 14"><path d="M2 12L12 2M5 2h7v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    </div>
+    <!-- node 4:135 + 4:136 -->
+    <div class="card-info">
+      <p class="card-name">Artê</p>
+      <p class="card-brief">Conexões através de habilidades criativas</p>
+    </div>
+  </a>
+
+  <!-- Row: App KLEP + Design Flow -->
+  <div class="proj-row">
+    <!-- node 93:137 — App KLEP -->
+    <div class="proj-card reveal d1" tabindex="0" role="button" aria-label="Projeto App KLEP">
+      <img
+        class="thumb"
+        src="https://www.figma.com/api/mcp/asset/df3cd5db-9eb9-47bc-9c56-d1ae1a144dec"
+        alt="App KLEP — Gestão de Consultas Médicas"
+        loading="lazy"
+      />
+      <div class="scrim"></div>
+      <div class="card-arrow" aria-hidden="true">
+        <svg width="13" height="13" viewBox="0 0 14 14"><path d="M2 12L12 2M5 2h7v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </div>
+      <div class="card-info">
+        <p class="card-name">App KLEP</p>
+        <p class="card-brief">Gestão de Consultas Médicas</p>
+      </div>
+    </div>
+
+    <!-- node 93:138 — Design Flow -->
+    <div class="proj-card reveal d2" tabindex="0" role="button" aria-label="Projeto Design Flow">
+      <img
+        class="thumb"
+        src="https://www.figma.com/api/mcp/asset/6397e2f1-0150-4881-9506-26b0f0164b13"
+        alt="Design Flow — +28% na conversão do checkout"
+        loading="lazy"
+      />
+      <div class="scrim"></div>
+      <div class="card-arrow" aria-hidden="true">
+        <svg width="13" height="13" viewBox="0 0 14 14"><path d="M2 12L12 2M5 2h7v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </div>
+      <div class="card-info">
+        <p class="card-name">Design Flow</p>
+        <p class="card-brief">+28% na conversão do checkout</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════ MARQUEE — Figma node 4:155 ══════════════════════ -->
+<section id="marquee" aria-hidden="true">
+  <div class="mq fwd">
+    <div class="mq-inner">
+      <span class="mw mw-out">Portfólio</span>
+      <span class="mw mw-cyan">Digital</span>
+      <span class="mw mw-fill">Design</span>
+      <span class="mw mw-viol">UX</span>
+      <span class="mw mw-out">Portfólio</span>
+      <span class="mw mw-cyan">Digital</span>
+      <span class="mw mw-fill">Design</span>
+      <span class="mw mw-viol">UX</span>
+    </div>
+  </div>
+  <div class="mq rev">
+    <div class="mq-inner">
+      <span class="mw mw-fill">Product <span class="mw-dot"></span></span>
+      <span class="mw mw-out">Strategy</span>
+      <span class="mw mw-viol">Research</span>
+      <span class="mw mw-lime">Interface</span>
+      <span class="mw mw-fill">Product</span>
+      <span class="mw mw-out">Strategy</span>
+      <span class="mw mw-viol">Research</span>
+      <span class="mw mw-lime">Interface</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ SOBRE MIM — Figma node 4:168 ══════════════════════ -->
+<section id="sobre" aria-label="Sobre mim">
+  <div class="sobre-grid">
+
+    <!-- Photo — node 4:169, 527×373 -->
+    <div class="reveal">
+      <div class="photo-frame">
+        <img
+          src="https://www.figma.com/api/mcp/asset/54be5186-28e4-48c7-9663-c2a70a68743a"
+          alt="Manuela Leão — UX &amp; Product Designer"
+          loading="lazy"
+        />
+        <div class="photo-badge">Disponível para projetos</div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div>
+      <!-- node 18:296 eyebrow -->
+      <div class="sobre-eyebrow reveal"><span>SOBRE MIM</span></div>
+      <!-- node 4:179 44px ExtraBold -->
+      <h2 class="sobre-name reveal d1">Manuela Leão</h2>
+      <!-- node 4:180 16px Regular -->
+      <p class="sobre-bio reveal d2">
+        Iniciei minha trajetória no design com foco no visual, mas expandi meu interesse para o contexto e a experiência do usuário. Hoje, atuo em projetos indo além da estética, aplicando um olhar estratégico voltado para UX e para a visão sistêmica do design.
+      </p>
+
+      <!-- node 18:297 timeline -->
+      <div class="reveal d3">
+        <div class="tl-label"><span>TRAJETÓRIA</span></div>
+        <div class="tl-wrap">
+          <div class="tl-line" aria-hidden="true"></div>
+
+          <div class="tl-item">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-year">2023 – Hoje</div>
+            <div>
+              <p class="tl-place">Graduação em Design · CESAR School</p>
+              <p class="tl-desc">Liderança de design em produto B2C com 200k usuários.</p>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-year">2026 – Hoje<br><small style="font-size:12px;font-weight:400">Janeiro</small></div>
+            <div>
+              <p class="tl-place">Curso de Certificação em UX Design · ESPM + Design Institute</p>
+              <p class="tl-desc">Liderança de design em produto B2C com 200k usuários.</p>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-year">2024 – 2026<br><small style="font-size:12px;font-weight:400">Set – Jan</small></div>
+            <div>
+              <p class="tl-place">Estágio em Product Design · Brencorp</p>
+              <p class="tl-desc">Projetos para saúde, educação e varejo.</p>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-year">2024<br><small style="font-size:12px;font-weight:400">Fev – Ago</small></div>
+            <div>
+              <p class="tl-place">Estágio em Marketing · Bruna Paz Brand</p>
+              <p class="tl-desc">Primeiras experiências em produto digital.</p>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-year">2022</div>
+            <div>
+              <p class="tl-place">Conclusão do Ensino Médio · Colégio Marista São Luís</p>
+              <p class="tl-desc">Formação com ênfase em comunicação visual.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CTA — Figma node 4:200 ══════════════════════ -->
+<section id="cta" aria-label="Contato">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <!-- node 4:204 eyebrow -->
+  <div class="cta-ey reveal"><span>VAMOS CONVERSAR</span></div>
+  <!-- node 4:205 64px ExtraBold -->
+  <h2 class="cta-title reveal d1">Tem um projeto
+em mente?</h2>
+  <!-- node 4:206 16px Light -->
+  <p class="cta-sub reveal d2">Estou sempre aberta a conversar sobre novos desafios,
+colaborações e oportunidades!</p>
+  <!-- node 95:228 button -->
+  <a href="mailto:oi@manu.design" class="btn-cta reveal d3" aria-label="Entrar em contato">
+    ENTRE EM CONTATO
+    <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg>
+  </a>
+</section>
+
+</main>
+
+<!-- ══════════════════════ FOOTER — Figma node 4:209 ══════════════════════ -->
+<footer role="contentinfo">
+  <!-- node 4:211 -->
+  <p class="foot-copy">© 2024 Manu Designer — Todos os direitos reservados</p>
+  <!-- node 4:215 -->
+  <nav class="foot-links" aria-label="Redes sociais">
+    <a href="https://linkedin.com" class="foot-a" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://behance.net"  class="foot-a" target="_blank" rel="noopener">Behance</a>
+    <a href="https://dribbble.com" class="foot-a" target="_blank" rel="noopener">Dribbble</a>
+    <a href="#"                    class="foot-a">Instagram</a>
+  </nav>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  /* Progress bar */
+  const prog=document.getElementById('progress');
+  /* Header scroll */
+  const hdr=document.getElementById('hdr');
+  function onScroll(){
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100;
+    prog.style.width=pct+'%';
+    hdr.classList.toggle('scrolled',window.scrollY>20);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+
+  /* Active nav */
+  const sections=document.querySelectorAll('section[id]');
+  const navAs=document.querySelectorAll('.nav-a');
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) navAs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));
+    });
+  },{threshold:.35,rootMargin:'-10% 0px -55% 0px'}).observe;
+  sections.forEach(s=>{
+    new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) navAs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));
+      });
+    },{threshold:.35,rootMargin:'-10% 0px -55% 0px'}).observe(s);
+  });
+
+  /* Mobile menu */
+  const ham=document.getElementById('ham');
+  const mnav=document.getElementById('mnav');
+  function closeM(){mnav.classList.remove('open');ham.classList.remove('open');ham.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  ham.addEventListener('click',()=>{
+    const o=ham.getAttribute('aria-expanded')==='true';
+    if(o){closeM();}else{mnav.classList.add('open');ham.classList.add('open');ham.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  });
+  mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeM));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',function(e){
+      const t=document.querySelector(this.getAttribute('href'));
+      if(!t) return;
+      e.preventDefault();
+      window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-hdr.offsetHeight-8,behavior:'smooth'});
+      closeM();
+    });
+  });
+
+  /* Reveal */
+  const ro=new IntersectionObserver(entries=>entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}
+  }),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+  /* Chip stagger */
+  const chips=document.querySelectorAll('.chip');
+  chips.forEach((c,i)=>{
+    c.style.opacity='0';c.style.transform='translateY(14px)';
+    c.style.transition=`opacity .5s var(--ease) ${.8+i*.04}s,transform .5s var(--ease) ${.8+i*.04}s`;
+  });
+  setTimeout(()=>chips.forEach(c=>{c.style.opacity='1';c.style.transform='none';}),100);
+
+  /* Parallax glows */
+  const gv=document.querySelector('.glow-vl');
+  const gc=document.querySelector('.glow-cy');
+  window.addEventListener('scroll',()=>{
+    if(gv)gv.style.transform=`translateY(${window.scrollY*.08}px)`;
+    if(gc)gc.style.transform=`translateY(${-window.scrollY*.05}px)`;
+  },{passive:true});
+
+  /* Cursor dot on hero */
+  const cd=document.createElement('div');
+  cd.style.cssText='position:fixed;pointer-events:none;z-index:9998;width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);transform:translate(-50%,-50%);transition:left .08s,top .08s,opacity .3s;opacity:0;';
+  document.body.appendChild(cd);
+  const hero=document.getElementById('hero');
+  hero.addEventListener('mousemove',e=>{cd.style.left=e.clientX+'px';cd.style.top=e.clientY+'px';cd.style.opacity='1';});
+  hero.addEventListener('mouseleave',()=>cd.style.opacity='0');
+
+  /* Keyboard for project cards */
+  document.querySelectorAll('.proj-card').forEach(c=>{
+    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}});
+  });
+
+  onScroll();
+})();
+</script>
+</body>
+</html>
