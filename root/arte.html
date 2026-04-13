@@ -114,10 +114,11 @@ header{
   transition:opacity .7s var(--ease),transform .7s var(--ease);
 }
 .phone-frame.vis{opacity:1;transform:translateY(0)}
-.phone-frame:nth-of-type(even){margin-top:190px}
-.phone-frame:nth-of-type(2){transition-delay:.12s}
-.phone-frame:nth-of-type(3){transition-delay:.24s}
-.phone-frame:nth-of-type(4){transition-delay:.36s}
+/* child order: phone(1) phone(2) sep(3) phone(4) phone(5) — offset phones 2 & 5 */
+.phone-frame:nth-child(2),.phone-frame:nth-child(5){margin-top:190px}
+.phone-frame:nth-child(2){transition-delay:.12s}
+.phone-frame:nth-child(4){transition-delay:.24s}
+.phone-frame:nth-child(5){transition-delay:.36s}
 .phone-row-sep{display:none}
 .phone-frame img.shell{width:100%;display:block;position:relative;z-index:2}
 .phone-frame .screen{
@@ -356,7 +357,7 @@ footer.cs-foot{
   .hero-top{grid-template-columns:1fr;gap:24px}
   .phone-row{gap:2%}
   .phone-frame{width:22%}
-  .phone-frame:nth-of-type(even){margin-top:120px}
+  .phone-frame:nth-child(2),.phone-frame:nth-child(5){margin-top:120px}
   .stats-3{grid-template-columns:1fr 1fr;gap:40px}
   .hmw-grid{grid-template-columns:1fr}
   .insight-grid{grid-template-columns:1fr}
@@ -381,8 +382,7 @@ footer.cs-foot{
   .cs-cta-title{font-size:36px;line-height:46px}
   .phone-row{flex-wrap:wrap;gap:12px;justify-content:center;row-gap:32px}
   .phone-frame{width:42%}
-  .phone-frame:nth-of-type(even){margin-top:0}
-  .phone-frame:nth-of-type(3),.phone-frame:nth-of-type(4){margin-top:0}
+  .phone-frame:nth-child(2),.phone-frame:nth-child(5){margin-top:0}
   .phone-row-sep{display:block;width:100%;height:0;flex-basis:100%}
   .ds-grid{grid-template-columns:1fr}
   .ds-large,.ds-medium{grid-row:auto}
