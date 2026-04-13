@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Artê — Case Study · Manu</title>
 <meta name="description" content="Case study: Artê — Plataforma digital que conecta pessoas a atividades manuais por meio de kits guiados e comunidade criativa."/>
+<link rel="icon" type="image/jpeg" href="https://instagram.frec3-1.fna.fbcdn.net/v/t51.82787-19/629172719_17927445615214579_1004800176393832195_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4zMjAuYzIifQ&_nc_ht=instagram.frec3-1.fna.fbcdn.net&_nc_cat=107&_nc_oc=Q6cZ2gEJhazRUnGURouvQXjw2K2wvAdLKrLwKMv0lxrD378JKWF_AgzL8RlWgPtckdnZ_EQ&_nc_ohc=pJO3cOgBY3gQ7kNvwESwe31&_nc_gid=ivNB038thG2ii_lCpSDLIQ&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_Af1vIPgvubu5GJvPKEjKrH4U16bPYdkypnVZpoFNnVhz3A&oe=69E2EAA8&_nc_sid=7a9f4b"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Lato:wght@300;400;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -112,10 +113,11 @@ header{
   transition:opacity .7s var(--ease),transform .7s var(--ease);
 }
 .phone-frame.vis{opacity:1;transform:translateY(0)}
-.phone-frame:nth-child(even){margin-top:190px}
-.phone-frame:nth-child(2){transition-delay:.12s}
-.phone-frame:nth-child(3){transition-delay:.24s}
-.phone-frame:nth-child(4){transition-delay:.36s}
+.phone-frame:nth-of-type(even){margin-top:190px}
+.phone-frame:nth-of-type(2){transition-delay:.12s}
+.phone-frame:nth-of-type(3){transition-delay:.24s}
+.phone-frame:nth-of-type(4){transition-delay:.36s}
+.phone-row-sep{display:none}
 .phone-frame img.shell{width:100%;display:block;position:relative;z-index:2}
 .phone-frame .screen{
   position:absolute;top:2%;left:3%;right:3%;bottom:2%;
@@ -267,30 +269,36 @@ section.cs-alt{background:var(--bg2)}
 .proto-wide img{width:100%;height:auto;display:block}
 .proto-caption{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;
   color:var(--ink3);margin-top:10px;text-align:center}
-.proto-center{
-  border-radius:12px;overflow:hidden;margin-top:24px;
-  background:var(--bg3);max-width:662px;margin-left:auto;margin-right:auto;
-}
-.proto-center img{width:100%;height:auto;display:block}
 
-/* Quote */
+/* ─── MOCKUP SHOWCASE — phone above quote, laptop below, both clipped ─── */
+.mockup-showcase{overflow:hidden;position:relative}
+.mockup-phone{
+  position:relative;overflow:hidden;
+  max-height:420px;
+  padding-left:var(--pad);
+}
+.mockup-phone img{
+  width:50%;max-width:662px;height:auto;display:block;
+  margin-left:30%;
+}
 .cs-quote{
   font-family:'Lato',sans-serif;font-size:24px;font-weight:700;
   letter-spacing:-.48px;line-height:1.2;color:var(--ink);
   max-width:1124px;margin:0 auto;text-align:center;
   padding:80px var(--pad);
 }
+.mockup-laptop{
+  position:relative;overflow:hidden;
+  max-height:480px;
+}
+.mockup-laptop img{
+  width:55%;max-width:720px;height:auto;display:block;
+  margin-left:auto;margin-right:-8%;
+}
 
 /* Full-bleed images */
 .full-img{overflow:hidden;position:relative}
 .full-img img{width:100%;height:auto;display:block}
-
-/* Laptop mockup */
-.laptop-wrap{
-  padding:60px var(--pad) 0;
-  overflow:hidden;max-height:560px;position:relative;
-}
-.laptop-wrap img{width:55%;display:block;margin-left:auto;height:auto}
 
 /* ─── CTA block ─── */
 .cs-cta{padding:80px var(--pad);border-top:1px solid var(--border)}
@@ -348,7 +356,7 @@ footer.cs-foot{
   .hero-top{grid-template-columns:1fr;gap:24px}
   .phone-row{gap:2%}
   .phone-frame{width:22%}
-  .phone-frame:nth-child(even){margin-top:120px}
+  .phone-frame:nth-of-type(even){margin-top:120px}
   .stats-3{grid-template-columns:1fr 1fr;gap:40px}
   .hmw-grid{grid-template-columns:1fr}
   .insight-grid{grid-template-columns:1fr}
@@ -359,7 +367,8 @@ footer.cs-foot{
   .journey{flex-wrap:wrap;gap:24px}
   .journey::before{display:none}
   .journey-step{flex:0 0 calc(50% - 12px)}
-  .laptop-wrap img{width:75%}
+  .mockup-phone img{width:60%;margin-left:20%}
+  .mockup-laptop img{width:70%;margin-right:-12%}
 }
 @media(max-width:700px){
   header,section.cs,.cs-cta,footer.cs-foot,#arte-hero{padding-left:20px;padding-right:20px}
@@ -370,14 +379,17 @@ footer.cs-foot{
   .cs-p{font-size:16px}
   .stats-3{grid-template-columns:1fr}
   .cs-cta-title{font-size:36px;line-height:46px}
-  .phone-row{flex-wrap:wrap;gap:12px;justify-content:center}
+  .phone-row{flex-wrap:wrap;gap:12px;justify-content:center;row-gap:32px}
   .phone-frame{width:42%}
-  .phone-frame:nth-child(even){margin-top:0}
-  .phone-frame:nth-child(3),.phone-frame:nth-child(4){margin-top:-40px}
+  .phone-frame:nth-of-type(even){margin-top:0}
+  .phone-frame:nth-of-type(3),.phone-frame:nth-of-type(4){margin-top:0}
+  .phone-row-sep{display:block;width:100%;height:0;flex-basis:100%}
   .ds-grid{grid-template-columns:1fr}
   .ds-large,.ds-medium{grid-row:auto}
-  .laptop-wrap{max-height:320px;padding-left:20px;padding-right:20px}
-  .laptop-wrap img{width:100%;margin:0 auto}
+  .mockup-phone{max-height:300px;padding-left:20px}
+  .mockup-phone img{width:70%;margin-left:10%}
+  .mockup-laptop{max-height:320px}
+  .mockup-laptop img{width:80%;margin-right:-15%}
   footer.cs-foot{height:auto;flex-direction:column;align-items:flex-start;padding-block:20px;gap:12px}
   .role-section{padding:48px 0 60px}
   .chip-lt{font-size:15px;padding:10px 16px}
@@ -458,6 +470,7 @@ var LINKS = {
         <img src="https://www.figma.com/api/mcp/asset/8b9a9ff5-fa37-457d-a061-eb994f41cec1" alt="Tela do app Artê — explorar" loading="eager"/>
       </div>
     </div>
+    <div class="phone-row-sep" aria-hidden="true"></div>
     <div class="phone-frame">
       <img class="shell" src="https://www.figma.com/api/mcp/asset/1f7fb7a6-779e-4394-9907-329183b00f58" alt="iPhone mockup" loading="eager"/>
       <div class="screen">
@@ -687,30 +700,33 @@ var LINKS = {
     </div>
   </div>
 
-  <div class="proto-center reveal d1">
+</section>
+
+<!-- ══════════════════════ MOCKUP SHOWCASE — phone + quote + laptop ══════════════════════ -->
+<div class="mockup-showcase">
+  <div class="mockup-phone reveal">
     <img
       src="https://www.figma.com/api/mcp/asset/fbdcfa22-77e9-4120-b6e9-1ce70d7f39db"
-      alt="Artê — telas finais do protótipo"
+      alt="Artê — mockup celular com tela do app"
       loading="lazy"
     />
   </div>
 
-  <div class="cs-quote reveal d2">
+  <div class="cs-quote reveal">
     Artê transforma a intenção de criar em ação, oferecendo tudo o que você precisa para aprender com autonomia, segurança e propósito.
   </div>
 
-  <div style="text-align:center" class="reveal d3">
+  <div style="text-align:center;padding-bottom:40px" class="reveal d1">
     <a data-link="siteArte" href="#" class="btn-outline">CONHEÇA O SITE DA ARTÊ</a>
   </div>
-</section>
 
-<!-- ══════════════════════ LAPTOP MOCKUP ══════════════════════ -->
-<div class="laptop-wrap reveal">
-  <img
-    src="https://www.figma.com/api/mcp/asset/cd0c1ce5-5d84-4303-8758-c35b13ff0076"
-    alt="Artê — telas em contexto no laptop"
-    loading="lazy"
-  />
+  <div class="mockup-laptop reveal d2">
+    <img
+      src="https://www.figma.com/api/mcp/asset/cd0c1ce5-5d84-4303-8758-c35b13ff0076"
+      alt="Artê — mockup computador com site da plataforma"
+      loading="lazy"
+    />
+  </div>
 </div>
 
 <!-- ══════════════════════ FULL-BLEED IMAGES ══════════════════════ -->
