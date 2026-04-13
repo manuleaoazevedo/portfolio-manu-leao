@@ -1055,11 +1055,19 @@
       }
       @media (max-width: 860px) {
         nav.pill {
-          display: none;
-        }
-        .hamburger {
-          display: flex;
-        }
+  gap: 18px;
+  padding: 0 18px;
+  height: 40px;
+}
+.hamburger {
+  display: none;
+}
+.mobile-nav {
+  display: none !important;
+}
+.nav-a {
+  font-size: 14px;
+}
         #hero {
           padding-top: calc(64px+32px);
         }
@@ -1130,6 +1138,16 @@
           gap: 12px;
         }
       }
+      @media (max-width: 420px) {
+  nav.pill {
+    gap: 8px;
+    padding: 0 10px;
+    height: 34px;
+  }
+  .nav-a {
+    font-size: 11px;
+  }
+}
     </style>
   </head>
   <body>
