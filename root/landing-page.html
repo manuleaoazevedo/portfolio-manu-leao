@@ -16,6 +16,17 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,900&family=Lato:wght@300;400;700;800;900&family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
     />
+   
+   @media (max-width: 420px) {
+  nav.pill {
+    gap: 8px;
+    padding: 0 10px;
+    height: 34px;
+  }
+  .nav-a {
+    font-size: 11px;
+  }
+}
     <style>
       /* ═══════════════════════════════════════════════
    DESIGN TOKENS — extracted from Figma inspection
@@ -1055,11 +1066,19 @@
       }
       @media (max-width: 860px) {
         nav.pill {
-          display: none;
-        }
-        .hamburger {
-          display: flex;
-        }
+  gap: 18px;
+  padding: 0 18px;
+  height: 40px;
+}
+.hamburger {
+  display: none;
+}
+.mobile-nav {
+  display: none !important;
+}
+.nav-a {
+  font-size: 14px;
+}
         #hero {
           padding-top: calc(64px+32px);
         }
