@@ -1517,39 +1517,33 @@
         }
         window.addEventListener("scroll", onScroll, { passive: true });
 
-        /* Active nav */
-        const sections = document.querySelectorAll("section[id]");
-        const navAs = document.querySelectorAll(".nav-a");
-        new IntersectionObserver(
-          (entries) => {
-            entries.forEach((e) => {
-              if (e.isIntersecting)
-                navAs.forEach((a) =>
-                  a.classList.toggle(
-                    "active",
-                    a.getAttribute("href") === "#" + e.target.id,
-                  ),
-                );
-            });
-          },
-          { threshold: 0.35, rootMargin: "-10% 0px -55% 0px" },
-        ).observe;
-        sections.forEach((s) => {
-          new IntersectionObserver(
-            (entries) => {
-              entries.forEach((e) => {
-                if (e.isIntersecting)
-                  navAs.forEach((a) =>
-                    a.classList.toggle(
-                      "active",
-                      a.getAttribute("href") === "#" + e.target.id,
-                    ),
-                  );
-              });
-            },
-            { threshold: 0.35, rootMargin: "-10% 0px -55% 0px" },
-          ).observe(s);
-        });
+       /* Active nav */
+const sections = document.querySelectorAll("section[id]");
+const navAs = document.querySelectorAll(".nav-a");
+const visibleSections = new Set();
+function updateActiveNav() {
+  const activeId = [...sections].find((s) => visibleSections.has(s.id))?.id ?? null;
+  navAs.forEach((a) =>
+    a.classList.toggle(
+      "active",
+      !!activeId && a.getAttribute("href") === "#" + activeId,
+    ),
+  );
+}
+sections.forEach((s) => {
+  new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        e.isIntersecting
+          ? visibleSections.add(e.target.id)
+          : visibleSections.delete(e.target.id);
+        updateActiveNav();
+      });
+    },
+    { threshold: 0.35, rootMargin: "-10% 0px -55% 0px" },
+  ).observe(s);
+});
+
 
         /* Mobile menu */
         const ham = document.getElementById("ham");
