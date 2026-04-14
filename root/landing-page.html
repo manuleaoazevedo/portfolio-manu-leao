@@ -114,17 +114,21 @@ header.scrolled {
   background: transparent;
 }
       .logo {
-        pointer-events: all;
-        display: flex;
-        align-items: center;
-        gap: 9px;
-        font-family: "Montserrat", sans-serif;
-        font-weight: 700;
-        font-size: 1rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--ink);
-      }
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  z-index: 202;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
       .logo-dot {
         width: 8px;
         height: 8px;
@@ -1056,15 +1060,10 @@ header.scrolled {
       }
       @media (max-width: 860px) {
        nav.pill {
-  gap: 16px;
-  padding: 0 20px;
-  height: 40px;
-}
-.hamburger {
-  display: none;
-}
-.mobile-nav {
-  display: none !important;
+  gap: 22px;
+  padding: 0 26px;
+  height: 48px;
+  top: 14px;
 }
 .nav-a {
   font-size: 15px;
@@ -1140,14 +1139,13 @@ header.scrolled {
         }
       }
       @media (max-width: 420px) {
-  nav.pill {
-    gap: 8px;
-    padding: 0 10px;
-    height: 34px;
-  }
-  .nav-a {
-    font-size: 11px;
-  }
+nav.pill {
+  gap: 14px;
+  padding: 0 18px;
+  height: 42px;
+}
+.nav-a {
+  font-size: 13px;
 }
     </style>
   </head>
