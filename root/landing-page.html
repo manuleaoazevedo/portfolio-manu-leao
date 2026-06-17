@@ -1228,122 +1228,81 @@ nav.pill {
 
       <!-- ══════════════════════ PROJETOS ══════════════════════ -->
       <!-- Figma node 4:126 bg:#060608 h:1155 -->
-      <section id="projetos" aria-label="Projetos selecionados">
-        <div class="proj-header reveal">
-          <!-- node 4:128 eyebrow -->
-          <div>
-            <div class="eyebrow"><span>PROJETOS SELECIONADOS</span></div>
-            <!-- node 4:129 48px ExtraBold -->
-            <h2 class="sec-title">Trabalhos que unem design e tecnologia</h2>
-          </div>
-          <!-- node 4:130 -->
-          <p class="proj-desc">
-            Cada projeto começa com uma pergunta genuína:
-            <strong> o que as pessoas realmente precisam?</strong>
-            Conecto estratégia e execução para transformar problemas reais em
-            soluções que funcionam.
-          </p>
-        </div>
+      <section id="projetos" style="background:#060608; padding:64px 96px 80px; border-top:1px solid rgba(240,240,238,0.08); position:relative;">
 
-        <!-- ARTÊ — node 93:136 — WIDE CARD com link para page-arte.html -->
-        <a
-          href="arte.html"
-          class="proj-wide reveal"
-          aria-label="Abrir case study: Artê"
-        >
-          <img
-            class="thumb"
-            src="assets/images/thumb-arte.webp"
-            alt="Projeto Artê — plataforma de atividades manuais"
-            loading="lazy"
-          />
-          <div class="scrim"></div>
-          <div class="card-arrow" aria-hidden="true">
-            <svg width="13" height="13" viewBox="0 0 14 14">
-              <path
-                d="M2 12L12 2M5 2h7v7"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                fill="none"
-              />
-            </svg>
-          </div>
-          <!-- node 4:135 + 4:136 -->
-          <div class="card-info">
-            <p class="card-name">Artê</p>
-            <p class="card-brief">Conexões através de habilidades criativas</p>
-          </div>
-        </a>
+  <!-- Cabeçalho em duas colunas -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; align-items:start; gap:40px; margin-bottom:52px;">
+    <div>
+      <!-- Eyebrow: linha cyan + label -->
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+        <div style="width:20px; height:1px; background:#00d4ff;"></div>
+        <span style="font-family:'DM Sans',sans-serif; font-weight:600; font-size:14px; letter-spacing:1.6px; color:#a8a9a6; text-transform:uppercase;">TODOS OS PROJETOS</span>
+      </div>
+      <!-- Título -->
+      <h2 style="font-family:'Lato',sans-serif; font-weight:800; font-size:48px; line-height:56px; letter-spacing:-1.2px; color:#f0f0ee;">Explorar por área</h2>
+    </div>
+    <!-- Descrição direita -->
+    <p style="font-family:'DM Sans',sans-serif; font-size:16px; line-height:26px; color:#a8a9a6; max-width:480px; align-self:center;">
+      Cada projeto começa com uma pergunta genuína: <strong style="font-weight:900; color:#a8a9a6;">o que as pessoas realmente precisam?</strong> Conecto estratégia e execução para transformar problemas reais em soluções que funcionam.
+    </p>
+  </div>
 
-        <!-- Row: App KLEP + Design Flow -->
-        <div class="proj-row">
-          <!-- node 93:137 — App KLEP -->
-          <div
-            class="proj-card reveal d1"
-            tabindex="0"
-            role="button"
-            aria-label="Projeto App KLEP"
-          >
-            <img
-              class="thumb"
-              src="assets/images/thumb-klep.webp"
-              alt="App KLEP — Gestão de Consultas Médicas"
-              loading="lazy"
-            />
-            <div class="scrim"></div>
-            <div class="card-arrow" aria-hidden="true">
-              <svg width="13" height="13" viewBox="0 0 14 14">
-                <path
-                  d="M2 12L12 2M5 2h7v7"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  fill="none"
-                />
-              </svg>
-            </div>
-            <div class="card-info">
-              <p class="card-name">App KLEP</p>
-              <p class="card-brief">Gestão de Consultas Médicas</p>
-            </div>
-          </div>
+  <!-- Filtros -->
+  <p style="font-family:'Montserrat',sans-serif; font-weight:600; font-size:12px; letter-spacing:1.6px; color:#5e6168; margin-bottom:16px;">FILTRAR POR</p>
+  <div id="filtros" style="display:flex; gap:12px; margin-bottom:32px;">
+    <button data-filter="todos"   class="filtro-btn active" style="height:51px; padding:0 22px; border-radius:30px; font-family:'DM Sans',sans-serif; font-weight:500; font-size:16px; letter-spacing:0.5px; cursor:pointer; transition:all 0.25s; background:#00d4ff; border:none; color:#060608;">Todos</button>
+    <button data-filter="produto" class="filtro-btn"        style="height:51px; padding:0 22px; border-radius:30px; font-family:'DM Sans',sans-serif; font-weight:500; font-size:16px; letter-spacing:0.5px; cursor:pointer; transition:all 0.25s; background:transparent; border:1px solid rgba(240,240,238,0.14); color:#a8a9a6;">Produto</button>
+    <button data-filter="grafico" class="filtro-btn"        style="height:51px; padding:0 22px; border-radius:30px; font-family:'DM Sans',sans-serif; font-weight:500; font-size:16px; letter-spacing:0.5px; cursor:pointer; transition:all 0.25s; background:transparent; border:1px solid rgba(240,240,238,0.14); color:#a8a9a6;">Gráfico</button>
+    <button data-filter="fisico"  class="filtro-btn"        style="height:51px; padding:0 22px; border-radius:30px; font-family:'DM Sans',sans-serif; font-weight:500; font-size:16px; letter-spacing:0.5px; cursor:pointer; transition:all 0.25s; background:transparent; border:1px solid rgba(240,240,238,0.14); color:#a8a9a6;">Físico</button>
+  </div>
 
-          <!-- node 93:138 — Design Flow -->
-          <div
-            class="proj-card reveal d2"
-            tabindex="0"
-            role="button"
-            aria-label="Projeto Design Flow"
-          >
-            <img
-              class="thumb"
-              src="assets/images/thumb-design-flow.webp"
-              alt="Design Flow — +28% na conversão do checkout"
-              loading="lazy"
-            />
-            <div class="scrim"></div>
-            <div class="card-arrow" aria-hidden="true">
-              <svg width="13" height="13" viewBox="0 0 14 14">
-                <path
-                  d="M2 12L12 2M5 2h7v7"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  fill="none"
-                />
-              </svg>
-            </div>
-            <div class="card-info">
-              <p class="card-name">Design Flow</p>
-              <p class="card-brief">+28% na conversão do checkout</p>
-            </div>
-          </div>
-        </div>
-      </section>
+  <!-- Grid de cards 3 colunas -->
+  <div id="grid-projetos" style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+
+    <!-- Card: Artê -->
+    <div class="proj-card" data-categoria="produto" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
+      <span style="display:inline-block; background:rgba(0,212,255,0.10); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#00d4ff; position:absolute; top:17px; left:17px;">PRODUTO</span>
+      <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">Artê</p>
+      <p style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px; color:#a8a9a6; position:absolute; bottom:17px; left:17px;">Plataforma de habilidades criativas</p>
+    </div>
+
+    <!-- Card: App KLEP -->
+    <div class="proj-card" data-categoria="produto" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
+      <span style="display:inline-block; background:rgba(0,212,255,0.07); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#00d4ff; position:absolute; top:17px; left:17px;">PRODUTO</span>
+      <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">App KLEP</p>
+      <p style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px; color:#a8a9a6; position:absolute; bottom:17px; left:17px;">Gestão de Consultas Médicas</p>
+    </div>
+
+    <!-- Card: Design Flow -->
+    <div class="proj-card" data-categoria="produto" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
+      <span style="display:inline-block; background:rgba(0,212,255,0.07); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#00d4ff; position:absolute; top:17px; left:17px;">PRODUTO</span>
+      <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">Design Flow</p>
+      <p style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px; color:#a8a9a6; position:absolute; bottom:17px; left:17px;">+28% na conversão do checkout</p>
+    </div>
+
+    <!-- Card: Helena e Luíz Gustavo -->
+    <div class="proj-card" data-categoria="grafico" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
+      <span style="display:inline-block; background:rgba(123,92,240,0.07); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#7b5cf0; position:absolute; top:17px; left:17px;">GRÁFICO</span>
+      <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">Helena e Luíz Gustavo</p>
+      <p style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px; color:#a8a9a6; position:absolute; bottom:17px; left:17px;">Identidade Visual do Casamento</p>
+    </div>
+
+    <!-- Card: Cadeira de Papelão -->
+    <div class="proj-card" data-categoria="fisico" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
+      <span style="display:inline-block; background:rgba(255,176,32,0.10); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#ffb020; position:absolute; top:16px; left:17px;">FÍSICO</span>
+      <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">Cadeira de Papelão</p>
+      <p style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px; color:#a8a9a6; position:absolute; bottom:17px; left:17px;">Feita 100% do material</p>
+    </div>
+
+    <!-- Card: Livro "A casa" -->
+    <div class="proj-card" data-categoria="fisico" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
+      <span style="display:inline-block; background:rgba(255,176,32,0.10); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#ffb020; position:absolute; top:16px; left:17px;">FÍSICO</span>
+      <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">Livro "A casa"</p>
+      <p style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px; color:#a8a9a6; position:absolute; bottom:17px; left:17px;">Diagramação em PopUp</p>
+    </div>
+
+  </div>
+</section>
 
       <!-- ══════════════════════ MARQUEE — Figma node 4:155 ══════════════════════ -->
       <section id="marquee" aria-hidden="true">
