@@ -1235,20 +1235,17 @@ nav.pill {
 
       <!-- ══════════════════════ PROJETOS ══════════════════════ -->
       <!-- Figma node 4:126 bg:#060608 h:1155 -->
-      <section id="projetos" style="background:#060608; padding:64px 96px 80px; border-top:1px solid rgba(240,240,238,0.08); position:relative;">
+     <section id="projetos" style="background:#060608; padding:64px 96px 80px; border-top:1px solid rgba(240,240,238,0.08); position:relative;">
 
-  <!-- Cabeçalho em duas colunas -->
+  <!-- Cabeçalho -->
   <div style="display:grid; grid-template-columns:1fr 1fr; align-items:start; gap:40px; margin-bottom:52px;">
     <div>
-      <!-- Eyebrow: linha cyan + label -->
       <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
         <div style="width:20px; height:1px; background:#00d4ff;"></div>
         <span style="font-family:'DM Sans',sans-serif; font-weight:600; font-size:14px; letter-spacing:1.6px; color:#a8a9a6; text-transform:uppercase;">TODOS OS PROJETOS</span>
       </div>
-      <!-- Título -->
       <h2 style="font-family:'Lato',sans-serif; font-weight:800; font-size:48px; line-height:56px; letter-spacing:-1.2px; color:#f0f0ee;">Explorar por área</h2>
     </div>
-    <!-- Descrição direita -->
     <p style="font-family:'DM Sans',sans-serif; font-size:16px; line-height:26px; color:#a8a9a6; max-width:480px; align-self:center;">
       Cada projeto começa com uma pergunta genuína: <strong style="font-weight:900; color:#a8a9a6;">o que as pessoas realmente precisam?</strong> Conecto estratégia e execução para transformar problemas reais em soluções que funcionam.
     </p>
@@ -1263,45 +1260,51 @@ nav.pill {
     <button data-filter="fisico"  class="filtro-btn"        style="height:51px; padding:0 22px; border-radius:30px; font-family:'DM Sans',sans-serif; font-weight:500; font-size:16px; letter-spacing:0.5px; cursor:pointer; transition:all 0.25s; background:transparent; border:1px solid rgba(240,240,238,0.14); color:#a8a9a6;">Físico</button>
   </div>
 
-  <!-- Grid de cards 3 colunas -->
+  <!-- Grid de cards -->
   <div id="grid-projetos" style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
 
-    <!-- Card: Artê -->
-    <div class="proj-card" data-categoria="produto" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
+    <!-- Artê -->
+    <a href="arte.html" class="proj-card" data-categoria="produto" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s; display:block; text-decoration:none;">
       <span style="display:inline-block; background:rgba(0,212,255,0.10); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#00d4ff; position:absolute; top:17px; left:17px;">PRODUTO</span>
+      <div style="position:absolute; top:16px; right:16px; width:34px; height:34px; border-radius:50%; border:1px solid rgba(240,240,238,0.14); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s;">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M5 2h7v7" stroke="#f0f0ee" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
       <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">Artê</p>
       <p style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px; color:#a8a9a6; position:absolute; bottom:17px; left:17px;">Plataforma de habilidades criativas</p>
-    </div>
+    </a>
 
-    <!-- Card: App KLEP -->
+    <!-- App KLEP -->
     <div class="proj-card" data-categoria="produto" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
       <span style="display:inline-block; background:rgba(0,212,255,0.07); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#00d4ff; position:absolute; top:17px; left:17px;">PRODUTO</span>
       <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">App KLEP</p>
       <p style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px; color:#a8a9a6; position:absolute; bottom:17px; left:17px;">Gestão de Consultas Médicas</p>
     </div>
 
-    <!-- Card: Design Flow -->
+    <!-- Design Flow -->
     <div class="proj-card" data-categoria="produto" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
       <span style="display:inline-block; background:rgba(0,212,255,0.07); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#00d4ff; position:absolute; top:17px; left:17px;">PRODUTO</span>
       <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">Design Flow</p>
       <p style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px; color:#a8a9a6; position:absolute; bottom:17px; left:17px;">+28% na conversão do checkout</p>
     </div>
 
-    <!-- Card: Helena e Luíz Gustavo -->
+    <!-- Helena e Luíz Gustavo -->
     <div class="proj-card" data-categoria="grafico" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
       <span style="display:inline-block; background:rgba(123,92,240,0.07); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#7b5cf0; position:absolute; top:17px; left:17px;">GRÁFICO</span>
       <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">Helena e Luíz Gustavo</p>
       <p style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px; color:#a8a9a6; position:absolute; bottom:17px; left:17px;">Identidade Visual do Casamento</p>
     </div>
 
-    <!-- Card: Cadeira de Papelão -->
-    <div class="proj-card" data-categoria="fisico" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
+    <!-- Cadeira de Papelão — LINKADO -->
+    <a href="cadeira-ninho.html" class="proj-card" data-categoria="fisico" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s; display:block; text-decoration:none;">
       <span style="display:inline-block; background:rgba(255,176,32,0.10); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#ffb020; position:absolute; top:16px; left:17px;">FÍSICO</span>
+      <div style="position:absolute; top:16px; right:16px; width:34px; height:34px; border-radius:50%; border:1px solid rgba(240,240,238,0.14); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s;">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M5 2h7v7" stroke="#f0f0ee" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
       <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">Cadeira de Papelão</p>
       <p style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px; color:#a8a9a6; position:absolute; bottom:17px; left:17px;">Feita 100% do material</p>
-    </div>
+    </a>
 
-    <!-- Card: Livro "A casa" -->
+    <!-- Livro "A casa" -->
     <div class="proj-card" data-categoria="fisico" style="background:#1a1d24; border:1px solid rgba(240,240,238,0.08); border-radius:14px; height:280px; position:relative; overflow:hidden; cursor:pointer; transition:border-color 0.3s, transform 0.3s;">
       <span style="display:inline-block; background:rgba(255,176,32,0.10); border-radius:4px; padding:3px 10px 5px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:1.2px; color:#ffb020; position:absolute; top:16px; left:17px;">FÍSICO</span>
       <p style="font-family:'Lato',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.5px; color:#f0f0ee; position:absolute; bottom:37px; left:17px;">Livro "A casa"</p>
@@ -1309,6 +1312,13 @@ nav.pill {
     </div>
 
   </div>
+       @media (max-width: 960px) {
+  #grid-projetos { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 600px) {
+  #grid-projetos { grid-template-columns: 1fr !important; }
+  #filtros { flex-wrap: wrap !important; }
+}
 </section>
 
       <!-- ══════════════════════ MARQUEE — Figma node 4:155 ══════════════════════ -->
@@ -1638,6 +1648,38 @@ sections.forEach((s) => {
           });
         });
 // Filtro de projetos
+document.querySelectorAll('.filtro-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filtro = btn.dataset.filter;
+    document.querySelectorAll('.filtro-btn').forEach(b => {
+      b.style.background = 'transparent';
+      b.style.border = '1px solid rgba(240,240,238,0.14)';
+      b.style.color = '#a8a9a6';
+    });
+    btn.style.background = '#00d4ff';
+    btn.style.border = 'none';
+    btn.style.color = '#060608';
+    document.querySelectorAll('#grid-projetos .proj-card').forEach(card => {
+      const match = filtro === 'todos' || card.dataset.categoria === filtro;
+      card.style.transition = 'opacity 0.3s, transform 0.3s';
+      card.style.opacity = match ? '1' : '0.15';
+      card.style.pointerEvents = match ? 'auto' : 'none';
+    });
+  });
+});
+
+// Hover nos cards
+document.querySelectorAll('#grid-projetos .proj-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.style.borderColor = 'rgba(240,240,238,0.22)';
+    card.style.transform = 'translateY(-4px)';
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.borderColor = 'rgba(240,240,238,0.08)';
+    card.style.transform = 'translateY(0)';
+  });
+});
+        // Filtro de projetos
 document.querySelectorAll('.filtro-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const filtro = btn.dataset.filter;
