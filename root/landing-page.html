@@ -1637,7 +1637,38 @@ sections.forEach((s) => {
             }
           });
         });
+// Filtro de projetos
+document.querySelectorAll('.filtro-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filtro = btn.dataset.filter;
+    document.querySelectorAll('.filtro-btn').forEach(b => {
+      b.style.background = 'transparent';
+      b.style.border = '1px solid rgba(240,240,238,0.14)';
+      b.style.color = '#a8a9a6';
+    });
+    btn.style.background = '#00d4ff';
+    btn.style.border = 'none';
+    btn.style.color = '#060608';
+    document.querySelectorAll('#grid-projetos .proj-card').forEach(card => {
+      const match = filtro === 'todos' || card.dataset.categoria === filtro;
+      card.style.transition = 'opacity 0.3s, transform 0.3s';
+      card.style.opacity = match ? '1' : '0.15';
+      card.style.pointerEvents = match ? 'auto' : 'none';
+    });
+  });
+});
 
+// Hover nos cards
+document.querySelectorAll('#grid-projetos .proj-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.style.borderColor = 'rgba(240,240,238,0.22)';
+    card.style.transform = 'translateY(-4px)';
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.borderColor = 'rgba(240,240,238,0.08)';
+    card.style.transform = 'translateY(0)';
+  });
+});
         onScroll();
       })();
     </script>
