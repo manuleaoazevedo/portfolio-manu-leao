@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Cadeira Ninho — Case Study · Manu</title>
+<meta name="description" content="Case study: Cadeira Ninho — Design de mobiliário em papelão inspirado nas formas orgânicas da natureza e no conceito de acolhimento."/>
+<link rel="icon" type="image/webp" href="assets/images/favicon.webp"/>
+<link rel="shortcut icon" href="assets/images/favicon.webp"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Lato:wght@300;400;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#f7f6f2;--bg2:#efede8;--bg3:#e8e5df;--white:#ffffff;
+  --ink:#1c1c1a;--ink2:#4a4a47;--ink3:#8a8882;--ink-mut:#a8a9a6;
+  --cyan:#0099cc;--cyan-dk:#00d4ff;--violet:#5b3fbe;--lime:#3d7a1a;
+  --amber:#ffb020;
+  --border:rgba(28,28,26,.09);--border2:rgba(28,28,26,.12);
+  --ease:cubic-bezier(.22,1,.36,1);--pad:96px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ─── PROGRESS BAR ─── */
+.prog-track{position:fixed;top:60px;left:0;right:0;height:2px;background:var(--bg3);z-index:299;pointer-events:none}
+#prog{position:fixed;top:60px;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet));z-index:300;pointer-events:none;transition:width .1s linear}
+
+/* ─── HEADER ─── */
+header{position:fixed;top:0;left:0;right:0;height:60px;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:rgba(247,246,242,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.logo-wrap{display:flex;align-items:center;gap:9px}
+.logo-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan-dk);box-shadow:0 0 6px var(--cyan-dk);animation:blink 2.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.logo-txt{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.5px;color:var(--ink)}
+.back-link{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.8px;color:var(--ink3);display:flex;align-items:center;gap:6px;transition:color .2s}
+.back-link:hover{color:var(--cyan-dk)}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ─── HERO ─── */
+#cn-hero{padding:calc(60px + 80px) var(--pad) 0;border-bottom:1px solid var(--border);overflow:hidden}
+.hero-top{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:60px}
+.cn-title{font-family:'Lato',sans-serif;font-size:52px;font-weight:800;line-height:60px;letter-spacing:-1.5px;color:var(--ink2);opacity:0;animation:fadeUp .8s var(--ease) .3s forwards}
+.cn-sub{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:400;line-height:28px;color:var(--ink2);max-width:568px;opacity:0;animation:fadeUp .8s var(--ease) .5s forwards;margin-top:20px}
+.hero-photos{display:grid;grid-template-columns:1fr 1fr;gap:16px;opacity:0;animation:fadeUp .8s var(--ease) .4s forwards}
+.foto-placeholder{background:var(--bg3);display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink3);letter-spacing:.5px;border-radius:20px;aspect-ratio:3/4;overflow:hidden}
+.foto-placeholder img{width:100%;height:100%;object-fit:cover}
+
+/* Role chips */
+.role-section{padding:80px 0 80px}
+.role-label{display:flex;align-items:center;gap:12px;margin-bottom:22px;opacity:0;animation:fadeUp .7s var(--ease) .6s forwards}
+.role-label::before{content:'';width:20px;height:1px;background:var(--cyan-dk);flex-shrink:0}
+.role-label span{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.6px;color:var(--ink-mut);text-transform:uppercase}
+.role-chips{display:flex;flex-wrap:wrap;gap:12px;opacity:0;animation:fadeUp .7s var(--ease) .7s forwards}
+.chip-lt{padding:13px 22px;border:1px solid var(--ink-mut);border-radius:30px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;letter-spacing:.5px;color:var(--ink-mut);cursor:default;transition:border-color .2s,color .2s,transform .2s var(--ease)}
+.chip-lt:hover{border-color:var(--cyan-dk);color:var(--cyan-dk);transform:translateY(-2px)}
+
+/* ─── SECTIONS ─── */
+section.cs{padding:80px var(--pad);border-top:1px solid var(--border)}
+section.cs-alt{background:var(--bg2)}
+.cs-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.cs-eyebrow::before{content:'';width:20px;height:1px;background:var(--cyan-dk);flex-shrink:0}
+.cs-eyebrow span{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.6px;color:var(--ink-mut);text-transform:uppercase}
+.cs-h2{font-family:'Lato',sans-serif;font-size:32px;font-weight:700;letter-spacing:-.5px;color:var(--ink);margin-bottom:24px}
+.cs-p{font-family:'DM Sans',sans-serif;font-size:18px;font-weight:400;line-height:28px;color:var(--ink2);max-width:800px}
+.cs-list{list-style:none;padding:0;margin-top:16px}
+.cs-list li{font-family:'DM Sans',sans-serif;font-size:16px;line-height:32px;color:var(--ink2)}
+.cs-list li::before{content:'·';margin-right:10px;color:var(--cyan);font-weight:700}
+
+/* Two-column layout */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:32px}
+.two-col-60{display:grid;grid-template-columns:3fr 2fr;gap:40px;align-items:start;margin-top:32px}
+
+/* Cards row */
+.cards-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:40px}
+.learn-card{background:var(--white);border:1px solid var(--border2);border-radius:12px;padding:20px}
+.learn-badge{display:inline-block;background:rgba(0,153,204,.08);border-radius:4px;padding:4px 12px 6px;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;color:var(--cyan);margin-bottom:14px}
+.learn-text{font-family:'Lato',sans-serif;font-size:14px;font-weight:400;line-height:22px;color:var(--ink2)}
+
+/* Concept chips */
+.concept-chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.concept-chip{padding:7px 14px;border-radius:14px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.5px}
+.cc-cyan{background:rgba(0,153,204,.10);color:var(--cyan)}
+.cc-amber{background:rgba(255,176,32,.10);color:var(--amber)}
+.cc-violet{background:rgba(91,63,190,.10);color:var(--violet)}
+.cc-lime{background:rgba(61,122,26,.10);color:var(--lime)}
+
+/* Photo grids */
+.photos-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:32px}
+.photo-ph{background:var(--bg3);border-radius:14px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink3);overflow:hidden}
+.photo-ph img{width:100%;height:100%;object-fit:cover}
+.ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ref-ph{background:var(--bg3);border-radius:12px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink3);overflow:hidden}
+.wide-ph{background:var(--bg3);border-radius:12px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink3);margin-top:32px;overflow:hidden}
+.square-ph{background:var(--bg3);border-radius:12px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink3);overflow:hidden}
+
+/* ─── CTA ─── */
+.cs-cta{padding:80px var(--pad);border-top:1px solid var(--border)}
+.cs-cta-title{font-family:'Montserrat',sans-serif;font-size:54px;font-weight:700;line-height:62px;letter-spacing:-2px;color:var(--ink);margin-bottom:24px;white-space:pre-line}
+.cs-cta-sub{font-family:'Lato',sans-serif;font-size:16px;font-weight:300;line-height:28px;color:var(--ink2);margin-bottom:40px}
+.btn-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;background:var(--cyan);border-radius:24px;padding:18px 42px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:#fff;transition:opacity .2s,transform .2s var(--ease)}
+.btn-primary:hover{opacity:.88;transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--cyan);border-radius:24px;padding:18px 42px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--cyan);transition:background .25s,color .25s,transform .25s var(--ease)}
+.btn-outline:hover{background:var(--cyan);color:#fff;transform:translateY(-2px)}
+
+/* ─── FOOTER ─── */
+footer.cs-foot{background:var(--bg);border-top:1px solid var(--border);padding:0 var(--pad);height:64px;display:flex;align-items:center;justify-content:space-between}
+.foot-copy{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:400;letter-spacing:.5px;color:var(--ink3)}
+.foot-links{display:flex;gap:40px}
+.foot-a{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.2px;color:var(--ink3);transition:color .2s}
+.foot-a:hover{color:var(--cyan-dk)}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+.reveal.vis{opacity:1;transform:none}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px){
+  :root{--pad:48px}
+  .hero-top{grid-template-columns:1fr;gap:32px}
+  .two-col,.two-col-60{grid-template-columns:1fr}
+  .cards-3{grid-template-columns:1fr}
+  .photos-3{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  header,section.cs,.cs-cta,footer.cs-foot,#cn-hero{padding-left:20px;padding-right:20px}
+  .cn-title{font-size:36px;line-height:46px}
+  .cs-h2{font-size:24px}
+  .cs-p{font-size:16px}
+  .cs-cta-title{font-size:36px;line-height:46px}
+  .hero-photos{grid-template-columns:1fr}
+  .photos-3{grid-template-columns:1fr}
+  .ref-grid{grid-template-columns:1fr}
+  .concept-chips{gap:8px}
+  .chip-lt{font-size:14px;padding:10px 16px}
+  .role-section{padding:48px 0 60px}
+  footer.cs-foot{height:auto;flex-direction:column;align-items:flex-start;padding-block:20px;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="prog-track" aria-hidden="true"></div>
+<div id="prog" aria-hidden="true"></div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header id="hdr">
+  <a href="landing-page.html" class="logo-wrap" aria-label="Manu — ir para portfólio">
+    <span class="logo-dot" aria-hidden="true"></span>
+    <span class="logo-txt">MANU</span>
+  </a>
+  <a href="landing-page.html" class="back-link">
+    <svg viewBox="0 0 14 14"><path d="M9 2L4 7l5 5"/></svg>
+    Voltar ao portfólio
+  </a>
+</header>
+
+<main>
+
+<!-- ══════════ 1. HERO ══════════ -->
+<section id="cn-hero">
+  <div class="hero-top">
+    <div>
+      <h1 class="cn-title">Cadeira Ninho<br>100% Papelão</h1>
+      <p class="cn-sub">Design de mobiliário em papelão inspirado nas formas orgânicas da natureza e no conceito de acolhimento.</p>
+    </div>
+    <div class="hero-photos">
+      <!-- SUBSTITUIR: foto real da cadeira montada -->
+      <div class="foto-placeholder">Foto: cadeira montada</div>
+      <!-- SUBSTITUIR: foto real da Manu sentada na cadeira -->
+      <div class="foto-placeholder">Foto: Manu na cadeira</div>
+    </div>
+  </div>
+
+  <div class="role-section">
+    <div class="role-label"><span>MEU PAPEL</span></div>
+    <div class="role-chips">
+      <span class="chip-lt">Pesquisa de Referências</span>
+      <span class="chip-lt">Sketches</span>
+      <span class="chip-lt">Corte e divisão das peças</span>
+      <span class="chip-lt">Nossa Ergonomia</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 2. O DESAFIO ══════════ -->
+<section class="cs" id="desafio">
+  <div class="cs-eyebrow reveal"><span>O DESAFIO</span></div>
+  <h2 class="cs-h2 reveal d1">Como criar uma cadeira confortável, resistente e acolhedora utilizando papelão como matéria-prima única?</h2>
+  <p class="cs-p reveal d2">O projeto surgiu a partir da proposta de desenvolver um mobiliário funcional utilizando materiais acessíveis e sustentáveis. Além de atender requisitos estruturais e ergonômicos, o produto deveria transmitir sensações de conforto e acolhimento por meio de sua linguagem formal.</p>
+</section>
+
+<!-- ══════════ 3. PESQUISA E INSPIRAÇÃO ══════════ -->
+<section class="cs cs-alt" id="pesquisa">
+  <div class="cs-eyebrow reveal"><span>PESQUISA E INSPIRAÇÃO</span></div>
+  <h2 class="cs-h2 reveal d1">Buscando referências na natureza e no design brasileiro</h2>
+
+  <div class="two-col-60 reveal d2">
+    <p class="cs-p">A principal inspiração foi a Cadeira Bultex, desenvolvida pelos Irmãos Campana, conhecida por suas formas orgânicas e pela sensação de abrigo proporcionada ao usuário.</p>
+    <div class="ref-grid">
+      <!-- SUBSTITUIR: foto de referência 1 -->
+      <div class="ref-ph">Ref: Cadeira Bultex</div>
+      <!-- SUBSTITUIR: foto de referência 2 -->
+      <div class="ref-ph">Ref: formas orgânicas</div>
+    </div>
+  </div>
+
+  <div class="cs-eyebrow reveal" style="margin-top:48px"><span>PRINCIPAIS APRENDIZADOS</span></div>
+  <div class="cards-3 reveal d1">
+    <div class="learn-card">
+      <div class="learn-badge">APRENDIZADO 1</div>
+      <p class="learn-text">Formas curvas transmitem acolhimento.</p>
+    </div>
+    <div class="learn-card">
+      <div class="learn-badge">APRENDIZADO 2</div>
+      <p class="learn-text">O conforto depende tanto da estrutura quanto das proporções.</p>
+    </div>
+    <div class="learn-card">
+      <div class="learn-badge">APRENDIZADO 3</div>
+      <p class="learn-text">O papelão possui excelente potencial estrutural quando utilizado corretamente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 4. DEFINIÇÃO DO CONCEITO ══════════ -->
+<section class="cs" id="conceito">
+  <div class="cs-eyebrow reveal"><span>DEFINIÇÃO DO CONCEITO</span></div>
+  <h2 class="cs-h2 reveal d1">Um ninho para descansar</h2>
+  <p class="cs-p reveal d2">A proposta foi traduzir a sensação de proteção encontrada nos ninhos naturais para uma peça de mobiliário. A estrutura envolvente cria uma experiência de abrigo, enquanto as curvas suaves reforçam a ideia de acolhimento e relaxamento.</p>
+
+  <div class="cs-eyebrow reveal" style="margin-top:48px"><span>CONCEITOS NORTEADORES</span></div>
+  <div class="concept-chips reveal d1">
+    <span class="concept-chip cc-cyan">Acolhimento</span>
+    <span class="concept-chip cc-amber">Robustez</span>
+    <span class="concept-chip cc-violet">Linear</span>
+    <span class="concept-chip cc-lime">Sustentabilidade</span>
+    <span class="concept-chip cc-cyan">Conforto</span>
+  </div>
+</section>
+
+<!-- ══════════ 5. IDEAÇÃO ══════════ -->
+<section class="cs cs-alt" id="ideacao">
+  <div class="cs-eyebrow reveal"><span>IDEAÇÃO</span></div>
+  <h2 class="cs-h2 reveal d1">Explorando possibilidades</h2>
+  <p class="cs-p reveal d2">O desenvolvimento começou com esboços manuais para investigar diferentes volumetrias e linguagens formais. Várias alternativas foram avaliadas até chegar a uma configuração que equilibrasse estética, estabilidade e conforto.</p>
+  <!-- SUBSTITUIR: imagem dos sketches -->
+  <div class="wide-ph reveal d3">Foto: sketches e esboços</div>
+</section>
+
+<!-- ══════════ 6. CRIAÇÃO ══════════ -->
+<section class="cs" id="criacao">
+  <div class="cs-eyebrow reveal"><span>CRIAÇÃO</span></div>
+  <h2 class="cs-h2 reveal d1">Modelagem Digital</h2>
+
+  <div class="two-col reveal d2">
+    <div>
+      <p class="cs-p">Transformando ideias em estrutura. Após a definição da forma principal, a cadeira foi modelada em 3D utilizando Onshape. Esta etapa permitiu validar:</p>
+      <ul class="cs-list">
+        <li>Proporções</li>
+        <li>Altura do assento</li>
+        <li>Curvatura do encosto</li>
+        <li>Distribuição estrutural</li>
+      </ul>
+    </div>
+    <!-- SUBSTITUIR: imagem da modelagem 3D / peças cortadas -->
+    <div class="wide-ph">Foto: modelagem 3D</div>
+  </div>
+</section>
+
+<!-- ══════════ 7. ENGENHARIA DA SOLUÇÃO ══════════ -->
+<section class="cs cs-alt" id="engenharia">
+  <div class="cs-eyebrow reveal"><span>ENGENHARIA DA SOLUÇÃO</span></div>
+  <h2 class="cs-h2 reveal d1">Projetando para fabricação</h2>
+
+  <div class="two-col reveal d2">
+    <div>
+      <p class="cs-p">Com o modelo validado, a estrutura foi adaptada para fabricação utilizando o Slicer for Fusion. O software permitiu dividir a cadeira em peças estruturadas, facilitando a produção e a montagem.</p>
+      <p class="cs-p" style="margin-top:24px;font-weight:600;color:var(--ink)">Desafios encontrados:</p>
+      <ul class="cs-list">
+        <li>Garantir estabilidade estrutural</li>
+        <li>Evitar deformações</li>
+        <li>Otimizar o consumo de material</li>
+      </ul>
+    </div>
+    <!-- SUBSTITUIR: imagem das peças no Slicer -->
+    <div class="square-ph">Foto: peças no Slicer</div>
+  </div>
+</section>
+
+<!-- ══════════ 8. PROTOTIPAÇÃO ══════════ -->
+<section class="cs" id="prototipacao">
+  <div class="cs-eyebrow reveal"><span>PROTOTIPAÇÃO</span></div>
+  <h2 class="cs-h2 reveal d1">Do digital para o físico</h2>
+  <p class="cs-p reveal d2">As peças foram cortadas em papelão e montadas manualmente. Durante a construção, diversos ajustes foram realizados para melhorar: resistência, estabilidade, acabamento e conforto.</p>
+
+  <div class="photos-3 reveal d3">
+    <!-- SUBSTITUIR: fotos da montagem -->
+    <div class="photo-ph">Foto: montagem 1</div>
+    <div class="photo-ph">Foto: montagem 2</div>
+    <div class="photo-ph">Foto: montagem 3</div>
+  </div>
+</section>
+
+<!-- ══════════ 9. TESTES E VALIDAÇÃO ══════════ -->
+<section class="cs cs-alt" id="testes">
+  <div class="cs-eyebrow reveal"><span>TESTES E VALIDAÇÃO</span></div>
+  <h2 class="cs-h2 reveal d1">Aprendendo com o uso real</h2>
+  <p class="cs-p reveal d2">O protótipo passou por testes de uso com pessoas reais para avaliar conforto, estabilidade e ergonomia.</p>
+
+  <div class="photos-3 reveal d3">
+    <!-- SUBSTITUIR: fotos dos testes -->
+    <div class="photo-ph">Foto: teste 1</div>
+    <div class="photo-ph">Foto: teste 2</div>
+    <div class="photo-ph">Foto: teste 3</div>
+  </div>
+</section>
+
+<!-- ══════════ 10. CTA FINAL ══════════ -->
+<div class="cs-cta">
+  <h2 class="cs-cta-title reveal">Vamos criar algo
+incrível juntos?</h2>
+  <p class="cs-cta-sub reveal d1">Estou sempre aberta a novos desafios e colaborações. Me conta!</p>
+  <div class="btn-row reveal d2">
+    <a href="mailto:manuleao.design@gmail.com" class="btn-primary">VAMOS CONVERSAR?</a>
+    <a href="landing-page.html" class="btn-outline">VER OUTROS PROJETOS</a>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="cs-foot" role="contentinfo">
+  <p class="foot-copy">© 2024 Manu Designer — Case Study: Cadeira Ninho</p>
+  <nav class="foot-links" aria-label="Redes sociais">
+    <a href="https://www.linkedin.com/in/manuleao/" class="foot-a" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var prog=document.getElementById('prog');
+  function updateProg(){
+    var total=document.documentElement.scrollHeight-window.innerHeight;
+    prog.style.width=(total>0?window.scrollY/total*100:0)+'%';
+  }
+  var hdr=document.getElementById('hdr');
+  window.addEventListener('scroll',function(){
+    updateProg();
+    hdr.style.boxShadow=window.scrollY>20?'0 1px 0 rgba(28,28,26,.1)':'none';
+  },{passive:true});
+  var ro=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}
+    });
+  },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+  updateProg();
+})();
+</script>
+</body>
+</html>
