@@ -6,5 +6,11 @@
       "destination": "/landing-page.html",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!assets|landing-page|arte|cadeira-ninho|a-casa|404).*)",
+      "destination": "/404.html"
+    }
   ]
 }
