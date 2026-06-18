@@ -70,15 +70,17 @@ nav.pill{position:fixed;top:12px;left:50%;transform:translateX(-50%);pointer-eve
 
 .notfound-suggest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 
-.notfound-mini-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:16px;min-height:110px;text-align:left;text-decoration:none;display:block;cursor:pointer;transition:border-color .2s,transform .2s}
-.notfound-mini-card:hover{border-color:var(--border2);transform:translateY(-2px)}
-
-.notfound-badge{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:9px;letter-spacing:1.2px;border-radius:4px;padding:5px 10px;margin-bottom:14px}
+.notfound-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;height:280px;position:relative;overflow:hidden;display:block;text-decoration:none;cursor:pointer;transition:border-color .3s,transform .3s}
+.notfound-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.notfound-card img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}
+.notfound-card .card-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.6) 100%)}
+.notfound-card .card-badge{display:inline-block;border-radius:4px;padding:3px 10px 5px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:9px;letter-spacing:1.2px;position:absolute;top:17px;left:17px;z-index:1}
 .badge-produto{background:rgba(0,212,255,0.1);color:var(--cyan)}
 .badge-fisico{background:rgba(255,176,32,0.1);color:var(--amber)}
-
-.notfound-card-name{font-family:'Lato',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.3px;color:var(--ink);margin-bottom:4px}
-.notfound-card-sub{font-family:'DM Sans',sans-serif;font-weight:300;font-size:12px;color:var(--ink2)}
+.notfound-card .card-arrow{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(240,240,238,0.14);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;z-index:1}
+.notfound-card:hover .card-arrow{opacity:1}
+.notfound-card .card-name{font-family:'Lato',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.5px;color:#f0f0ee;position:absolute;bottom:37px;left:17px;z-index:1}
+.notfound-card .card-sub{font-family:'DM Sans',sans-serif;font-weight:300;font-size:13px;color:#a8a9a6;position:absolute;bottom:17px;left:17px;z-index:1}
 
 footer{background:#0e0f11;border-top:1px solid var(--border);padding:0 96px;height:72px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
 .foot-copy{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:400;letter-spacing:.5px;color:var(--ink3)}
@@ -96,6 +98,7 @@ footer{background:#0e0f11;border-top:1px solid var(--border);padding:0 96px;heig
   .notfound-zero::after{width:10px;height:10px;top:8px}
   .notfound-headline{font-size:28px;line-height:36px}
   .notfound-suggest-grid{grid-template-columns:1fr}
+  .notfound-card{height:220px}
   .notfound-actions{flex-direction:column;align-items:center}
 }
 @media(max-width:600px){
@@ -150,20 +153,29 @@ footer{background:#0e0f11;border-top:1px solid var(--border);padding:0 96px;heig
   <p class="notfound-suggest-label">TALVEZ VOCÊ ESTAVA PROCURANDO</p>
 
   <div class="notfound-suggest-grid">
-    <a href="arte.html" class="notfound-mini-card">
-      <span class="notfound-badge badge-produto">PRODUTO</span>
-      <p class="notfound-card-name">Artê</p>
-      <p class="notfound-card-sub">Plataforma de habilidades criativas</p>
+    <a href="arte.html" class="notfound-card">
+      <img src="assets/images/capa-casa.webp" alt="Artê"/>
+      <div class="card-overlay"></div>
+      <span class="card-badge badge-produto">PRODUTO</span>
+      <div class="card-arrow"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M5 2h7v7" stroke="#f0f0ee" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <p class="card-name">Artê</p>
+      <p class="card-sub">Plataforma de habilidades criativas</p>
     </a>
-    <a href="cadeira-ninho.html" class="notfound-mini-card">
-      <span class="notfound-badge badge-fisico">FÍSICO</span>
-      <p class="notfound-card-name">Cadeira Ninho</p>
-      <p class="notfound-card-sub">Mobiliário 100% papelão</p>
+    <a href="cadeira-ninho.html" class="notfound-card">
+      <img src="assets/images/capa-cadeira.webp" alt="Cadeira Ninho"/>
+      <div class="card-overlay"></div>
+      <span class="card-badge badge-fisico">FÍSICO</span>
+      <div class="card-arrow"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M5 2h7v7" stroke="#f0f0ee" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <p class="card-name">Cadeira Ninho</p>
+      <p class="card-sub">Mobiliário 100% papelão</p>
     </a>
-    <a href="a-casa.html" class="notfound-mini-card">
-      <span class="notfound-badge badge-fisico">FÍSICO</span>
-      <p class="notfound-card-name">Livro "A Casa"</p>
-      <p class="notfound-card-sub">Diagramação em PopUp</p>
+    <a href="a-casa.html" class="notfound-card">
+      <img src="assets/images/capa-livro.webp" alt="Livro A Casa"/>
+      <div class="card-overlay"></div>
+      <span class="card-badge badge-fisico">FÍSICO</span>
+      <div class="card-arrow"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M5 2h7v7" stroke="#f0f0ee" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <p class="card-name">Livro "A Casa"</p>
+      <p class="card-sub">Diagramação em PopUp</p>
     </a>
   </div>
 
