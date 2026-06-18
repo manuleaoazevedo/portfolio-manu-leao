@@ -9,7 +9,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!assets|landing-page|arte|cadeira-ninho|a-casa|designflow|404).*)",
+      "source": "/((?!assets|landing-page|arte|cadeira-ninho|a-casa|designflow|klep|404).*)",
       "destination": "/404.html"
     }
   ]
