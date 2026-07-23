@@ -1057,6 +1057,10 @@ header.scrolled {
           font-size: 64px;
           line-height: 72px;
         }
+        #projetos {
+          padding-left: 48px !important;
+          padding-right: 48px !important;
+        }
       }
       @media (max-width: 860px) {
        nav.pill {
@@ -1100,6 +1104,9 @@ header.scrolled {
           padding: 0 24px;
         }
       }
+      @media (max-width: 960px) {
+        #grid-projetos { grid-template-columns: 1fr 1fr !important; }
+      }
       @media (max-width: 600px) {
         header,
         #hero,
@@ -1137,22 +1144,33 @@ header.scrolled {
           padding-block: 20px;
           gap: 12px;
         }
-      }
-      @media (max-width: 420px) {
-nav.pill {
-  gap: 14px;
-  padding: 0 18px;
-  height: 42px;
-}
-.nav-a {
-  font-size: 13px;
-}
-        @media (max-width: 960px) {
-        #grid-projetos { grid-template-columns: 1fr 1fr !important; }
-      }
-      @media (max-width: 600px) {
+        nav.pill { display: none !important; }
+        .hamburger {
+          display: flex;
+          margin-left: auto;
+          pointer-events: all;
+        }
+        #projetos {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+          padding-top: 40px !important;
+        }
+        #projetos > div:first-child {
+          grid-template-columns: 1fr !important;
+          gap: 20px !important;
+        }
         #grid-projetos { grid-template-columns: 1fr !important; }
         #filtros { flex-wrap: wrap !important; }
+      }
+      @media (max-width: 420px) {
+        nav.pill {
+          gap: 14px;
+          padding: 0 18px;
+          height: 42px;
+        }
+        .nav-a {
+          font-size: 13px;
+        }
       }
     </style>
   </head>
